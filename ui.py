@@ -199,8 +199,8 @@ st.set_page_config(
     layout="centered",  # Layout: 'centered' or 'wide'
 )
 
-st.header("Movazo at your service!")
-st.subheader(" I can help you with your next movie plan.")
+st.header("Movazo – Movie Plans Made Effortless")
+st.subheader("Helping you find the best theatres and showtimes, fast and hassle-free. Let’s get started!")
 
 user_input = st.text_input("Ask here:")
 if st.button("Send"):
