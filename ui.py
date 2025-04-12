@@ -53,7 +53,6 @@ def getLatitudeLongitude(city):
         return None
 
 def searchMovie(movie_name):
-
     encoded_name = urllib.parse.quote_plus(movie_name)
     url = f"https://api-gate2.movieglu.com/filmLiveSearch/?query={encoded_name}"
     HEADERS = {
@@ -65,14 +64,18 @@ def searchMovie(movie_name):
         "geolocation": "-22.0;14.0",  # Dummy default
         "device-datetime": "2025-03-27T14:45:30.000",
     }
-    response = requests.get(url, headers=HEADERS)
-    response.raise_for_status()
+    try:
+        response = requests.get(url, headers=HEADERS)
+        response.raise_for_status()
 
-    if response.status_code == 204 or not response.content:
-        return "Sorry, I couldn't find any movies with that name. Please check for typos or try searching for another movie. Let me know how I can assist you further!"
+        if response.status_code == 204 or not response.content:
+            return None
 
-    data = response.json()
-    return data["films"][0]["film_id"] if "films" in data and data["films"] else None
+        data = response.json()
+        return data["films"][0]["film_id"] if "films" in data and data["films"] else None
+    except requests.exceptions.RequestException as e:
+        print(f"[MovieSearchError] {e}")
+        return None
 
 def filmShowDetails(movie_name, location, date):
     # print("Getting show details from the theatres...")
