@@ -180,6 +180,7 @@ def chat(user_input):
                 "- If there are no results, say: 'There are no available shows for the given time or location.'\n"
                 "- Ask if the user would like to try another movie, date, or time.\n"
                 "- Do not make up results or provide guesses. If data is unavailable, say so clearly.\n"
+                "-Make sure to use the data from the tool call only. Do not give responses that contain details about how the chatbot works\n"
                 "- Keep your response short, clear, and user-friendly."
             )
         })
